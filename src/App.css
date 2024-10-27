@@ -1,0 +1,22 @@
+@font-face {
+  font-family: 'Grotesk-DarkBold';
+  src: url("/public/fonts/BDOGrotesk-ExtraBold-BF648a656f91fd9.ttf");
+}
+
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  --bs-font:1rem;
+}
+
+.dark-bold{
+  font-family: 'Grotesk-DarkBold';
+}
+
+.fsize{
+  font-size: calc(var(--bs-font) + 0.25vw);
+}
