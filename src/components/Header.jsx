@@ -16,7 +16,7 @@ const Header = () => {
 <div className="flex w-full md:w-auto justify-between">
 
             <img
-              src="../../public/images/cover-removebg-preview.png"
+              src="/public/images/cover-removebg-preview.png"
               alt=""
               width={"170px"}
               height={"0.8rem"}
