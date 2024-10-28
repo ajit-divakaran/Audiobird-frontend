@@ -60,10 +60,12 @@ const Header = () => {
           isMenuClicked ? "pb-8" : "hidden"
         } md:block ml-4 md:ml-0 mr-6`}
       >
-        <button className="text-white">
-          <FontAwesomeIcon icon={faHistory} className="mr-2" />
-          Watch History
-        </button>
+        <Link to={'/watchhistory'}>
+          <button className="text-white">
+            <FontAwesomeIcon icon={faHistory} className="mr-2" />
+            Watch History
+          </button>
+        </Link>
       </div>
     </div>
   );
