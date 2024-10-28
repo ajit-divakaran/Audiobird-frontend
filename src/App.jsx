@@ -3,6 +3,7 @@ import './App.css'
 import Header from './components/Header'
 import Watchlist from './pages/Watchlist'
 import Landing from './pages/Landing'
+import Watchhistory from './pages/Watchhistory'
 function App() {
 
 
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path = '/' element={<Landing/>}/>
         <Route path='/watchlist' element={<Watchlist/>}/>
+        <Route path='/watchhistory' element={<Watchhistory/>} />
       </Routes>
  
     </>
