@@ -2,8 +2,10 @@ import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import Header from './components/Header'
 import Watchlist from './pages/Watchlist'
-import Landing from './pages/Landing'
+
 import Watchhistory from './pages/Watchhistory'
+import Footer from './components/Footer'
+import HomePage from './pages/Landing'
 function App() {
 
 
@@ -16,10 +18,11 @@ function App() {
       </h1> */}
 
       <Routes>
-        <Route path = '/' element={<Landing/>}/>
+        <Route path = '/' element={<HomePage/>}/>
         <Route path='/watchlist' element={<Watchlist/>}/>
         <Route path='/watchhistory' element={<Watchhistory/>} />
       </Routes>
+      <Footer/>
  
     </>
   )
