@@ -1,9 +1,28 @@
 import { faHouse, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function Watchhistory() {
+  const [allHisPlaylist, setallHisPlaylist] = useState([])
+
+  const getAllHistory = async()=>{
+    const result = await getAudiobookHistoryApi()
+    setallHisPlaylist(result.data);
+    
+  }
+
+  console.log(allHisPlaylist);
+  
+  const handleDelete = async(id)=>{
+    const result = await deleteHistoryAudiobookApi(id)
+    console.log(result);
+    
+  }
+
+  useEffect(()=>{
+    getAllHistory()
+  },[])
   return (
     <div className='p-4'>
       <div className="flex items-center mt-5">
@@ -18,7 +37,7 @@ function Watchhistory() {
       <div className="container mx-auto mt-5">
         <div className="flex justify-center">
           <div className="w-full max-w-4xl p-3 overflow-auto">
-            <table className='min-w-full mt-5 border border-gray-200'>
+           {allHisPlaylist?.length>0? <table className='min-w-full mt-5 border border-gray-200'>
               <thead>
                 <tr className="bg-gray-100">
                   <th className="px-4 py-2 text-left border-b border-gray-200">SL.NO</th>
@@ -29,20 +48,24 @@ function Watchhistory() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                {allHisPlaylist?.map((item)=>(
+                  <tr>
                   <td className="px-4 py-2 border-b border-gray-200">1</td>
                   <td className="px-4 py-2 border-b border-gray-200">dummy</td>
                   <td className="px-4 py-2 border-b border-gray-200">dummy</td>
                   <td className="px-4 py-2 border-b border-gray-200">dummy</td>
                   <td className="px-4 py-2 border-b border-gray-200">
-                    <button className='text-red-600 hover:text-red-800'>
+                    <button onClick={()=>handleDelete(item?.id)} className='text-red-600 hover:text-red-800'>
                       <FontAwesomeIcon icon={faTrash} />
                     </button>
                   </td>
                 </tr>
+                ))
+                }
               </tbody>
             </table>
-            <h3 className='text-yellow-500 text-center mt-4'>History Cleared</h3>
+              :
+            <h3 className='text-yellow-500 text-center mt-4'>History Cleared</h3>}
           </div>
         </div>
       </div>
