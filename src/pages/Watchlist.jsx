@@ -1,9 +1,14 @@
-import { faAdd, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faAdd, faPlay, faPlayCircle, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons/faCirclePlus";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef, useState } from "react";
 import React from "react";
-import { AddCategoryApi, AddMetaDataApi, GetCategoryApi, GetMetaDataApi } from "../services/allApi";
+import {
+  AddCategoryApi,
+  GetCategoryApi,
+  GetMetaDataApi,
+  UpdateMetaDataApi,
+} from "../services/allApi";
 
 const Watchlist = () => {
   const cardRef = useRef(null); // To get the width of the first element card height
@@ -16,8 +21,8 @@ const Watchlist = () => {
   const [allcategory, setAllcategory] = useState([]);
   const [isOpen, setIsOpen] = useState(false); // toggle Add category modal
   const [isOpen1, setIsOpen1] = useState(false); // toggle Add category modal
-  const[allMetaData,setAllMetaData] = useState({})
-  const [id,setId] = useState(null);
+  // const[allMetaData,setAllMetaData] = useState({})
+  const [id, setId] = useState(null);
   // const [inputValue, setInputValue] = useState(null)
   // const [getCategoryStatus, setGetCategoryStatus] = useState({});
 
@@ -42,35 +47,40 @@ const Watchlist = () => {
     }
   };
 
-  const handleAddCategory = async (categoryInput) => {
-    toggleModal();
-
-    const result = await AddCategoryApi(categoryInput);
-    if (result.status > 200 && result.status < 300)
-      // setGetCategoryStatus(result.data);
-    getAllcategory()
+  const getAllcategory = async () => {
+    const result = await GetCategoryApi();
     console.log(result);
+    if (result.status >= 200 && result.status < 300) {
+      setAllcategory(result.data);
+    }
+  };
+
+  const handleAddCategory = async (categoryInput) => {
+    const result = await AddCategoryApi(categoryInput);
+    if (result.status >= 200 && result.status < 300) {
+      getAllcategory();
+      console.log(result);
+      toggleModal();
+    }
+    // setGetCategoryStatus(result.data);
   };
 
   const handleInput = () => {
-    if (inputRefCategoryName.current && inputRefCategoryName.current.value != "") {
+    if (
+      inputRefCategoryName.current &&
+      inputRefCategoryName.current.value != ""
+    ) {
       // setCategory({ name: "test audiobook" });
       console.log(inputRefCategoryName.current.value);
       // console.log(category);
-      handleAddCategory({name:inputRefCategoryName.current.value,cards:[]});
+      handleAddCategory({
+        name: inputRefCategoryName.current.value,
+        cards: [],
+      });
     } else {
       alert("Category cannot be blank");
     }
     toggleModal();
-  };
-
-  const getAllcategory = async () => {
-    const result = await GetCategoryApi();
-    console.log(result.data);
-    // if (result?.data) {
-      setAllcategory(result.data);
-      console.log(allcategory);
-    // }
   };
 
   const toggleModalMedia = () => {
@@ -85,37 +95,54 @@ const Watchlist = () => {
     }
   };
 
-  const handleMetaData = (id)=>{
+  const handleMetaDataClick = (id) => {
     setId(id);
-    toggleModalMedia()
-  }
-  const getAllMetaData = async() =>{
-const result = await GetMetaDataApi(id);
-setAllMetaData(result.data)
-  }
+    toggleModalMedia();
+  };
+  //   const getAllMetaData = async() =>{
+  // const result = await GetMetaDataApi(id);
+  // console.log(result)
+  // setAllMetaData(result.data.cards)
+  // }
 
-  const addMetadata = async() =>{
-    if(inputRefDesc.current.value!="" && inputRefImage.current.value!="" && inputRefTitle.current.value!="" ){
-      console.log(inputRefImage.current.value,inputRefTitle.current.value,inputRefDesc.current.value)
-      console.log(id)
-      const result = await AddMetaDataApi({img:inputRefImage.current.value,title:inputRefTitle.current.value,desc:inputRefDesc.current.value},id);
-      console.log(result.data)  
-        if(result.status>200 && result.status<300)
-          {      
-                  getAllMetaData()
-          }
-    }
-    else{
-      alert("Input fields cannot be empty")
+  const addMetadata = async () => {
+    if (
+      inputRefDesc.current.value != "" &&
+      inputRefImage.current.value != "" &&
+      inputRefTitle.current.value != ""
+    ) {
+      console.log(
+        inputRefImage.current.value,
+        inputRefTitle.current.value,
+        inputRefDesc.current.value
+      );
+      console.log(id);
+      const result = await GetMetaDataApi(id);
+      if (result.status >= 200 && result.status < 300) {
+        console.log(typeof result.data);
+        const card = {
+          img: inputRefImage.current.value,
+          title: inputRefTitle.current.value,
+          desc: inputRefDesc.current.value,
+        };
+        result.data.cards.push(card);
+        console.log(result.data);
+        const update = await UpdateMetaDataApi(result.data, id);
+        console.log(update.data);
+      }
+      // getAllMetaData()
+      getAllcategory();
+    } else {
+      alert("Input fields cannot be empty");
     }
 
-    toggleModalMedia()
-  }
+    toggleModalMedia();
+  };
   useEffect(() => {
     // Measure height on mount
     updateCardHeight();
     getAllcategory();
-    getAllMetaData();
+
     // Add event listener for window resize
     window.addEventListener("resize", updateCardHeight);
 
@@ -124,10 +151,15 @@ setAllMetaData(result.data)
       window.removeEventListener("resize", updateCardHeight);
     };
   }, []);
+
   return (
     <div
       className="p-6 px-7 "
-      style={{ backgroundColor: "#262626", color: "#ebeff5",minHeight:'90vh' }}
+      style={{
+        backgroundColor: "#262626",
+        color: "#ebeff5",
+        minHeight: "90vh",
+      }}
     >
       <div className="text-center">
         <h1 className="fsize" style={{ "--bs-font": "1.15rem" }}>
@@ -139,42 +171,39 @@ setAllMetaData(result.data)
       {allcategory?.length > 0 ? (
         <div className="category mt-8">
           {allcategory?.map((item) => (
-            <>
-             
+            <div key={item?.id}>
               <h1 className="fsize" style={{ "--bs-font": "2.1rem" }}>
                 {item.name}
               </h1>
               <hr className="border-t-1 border-gray-700 w-1/2 " />
-              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mt-5 gap-y-5 md:gap-x-2 place-items-center">
-{               allMetaData?.length>0 && <div
-                  className="card flex flex-col border border-solid border-sky-400 w-11/12 justify-between rounded-md"
-                  ref={cardRef}
-                >
-                  {allMetaData?.map((data)=>(
-               <>
-                      <img
-                      src={data.img}
-                      alt=""
-                      style={{ height: "10rem" }}
-                    />
+              <div className="grid grid-cols-1 auto-rows-minmax-300px-auto md:grid-cols-3 lg:grid-cols-4 mt-5 gap-y-5 md:gap-x-2 place-items-center">
+                {item?.cards.map((data) => (
+                  <div
+                    key={item.id}
+                    ref={cardRef}
+                    className="border h-full border-solid border-sky-400 flex flex-col w-11/12 justify-between rounded-md"
+                  >
+                    <div className="relative w-full "><img src={data?.img} alt="" style={{ height: "10rem" ,width:'100%'}} />
+                    <FontAwesomeIcon icon={faPlay} className="fa-2x text-green-500 absolute top-[50%] left-[45%] transition-transform hover:scale-125"/>
+                    </div>
                     <div className="p-3 px-4 bg-transparent">
                       <h2 className="fsize" style={{ "--bs-font": "1.65rem" }}>
-                       {data.title}
+                        {data?.title}
                       </h2>
-                      <p className="text-xs mt-2">
-                        {data.desc}
-                      </p>
+                      <p className="text-xs mt-2">{data?.desc.length>50? data?.desc.slice(50)+"...":data?.desc}</p>
                       <button className="bg-blue-500 text-white  py-2 px-4 rounded hover:bg-blue-700 mt-4 w-3/4 text-sm">
                         Learn More
                       </button>
                     </div>
-               </>
+                  </div>
                 ))}
-                </div>}
+
                 <div
-                  className="flex flex-col border-2 border-dotted border-sky-400 w-11/12 justify-center items-center rounded-md min-h-full bg-[#38bff826]"
-                  style={{ minHeight: `${cardHeight}px` } } onClick={()=>handleMetaData(item.id)}
+                  className="flex flex-col min-h-[300px] border-2 border-dotted border-sky-400 w-11/12 justify-center items-center rounded-md min-h-full bg-[#38bff826]"
+                  // style={{ minHeight: `${cardHeight}px` }}
+                  onClick={() => handleMetaDataClick(item?.id)}
                 >
+                  {console.log(cardHeight)}
                   <FontAwesomeIcon
                     icon={faCirclePlus}
                     className="fa-3x w-[fit-content] bg-white rounded-full hover:scale-110 transition-transform hover:cursor-pointer"
@@ -182,12 +211,14 @@ setAllMetaData(result.data)
                   />
                 </div>
               </div>
-            </>
+            </div>
           ))}
         </div>
-      ):
-      <div className="flex items-center justify-center w-full"><img src="/images/Empty-pana.png" alt="no image" width={'40%'} />
-        </div>}
+      ) : (
+        <div className="flex items-center justify-center w-full">
+          <img src="/images/Empty-pana.png" alt="no image" width={"40%"} />
+        </div>
+      )}
 
       <button
         className="fixed right-10 bottom-6 bg-[#ffca2c] px-4 py-2 rounded-full text-black"
@@ -229,7 +260,6 @@ setAllMetaData(result.data)
           </div>
         </div>
       )}
-
 
       {isOpen1 && (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-start justify-center z-50">
@@ -283,93 +313,3 @@ setAllMetaData(result.data)
 };
 
 export default Watchlist;
-
-{
-  /* <div className="category mt-8">
-        <h1>Motivational</h1>
-        <hr className="border-t-1 border-gray-700 w-1/2 " />
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mt-5 gap-y-5 md:gap-x-2 place-items-center items-stretch">
-          <div className="card flex flex-col border border-solid border-sky-400 w-11/12 justify-between rounded-md">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwm8GC2zXFmi6LR50M69scCiQyasKYRUeKkg&s"
-              alt=""
-              style={{ height: "10rem" }}
-            />
-            <div className="p-3 px-4">
-              <h2 className="fsize" style={{'--bs-font':'1.65rem'}}>Card title</h2>
-              <p className="text-xs mt-2">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Obcaecati similique quisquam iste nesciunt, ea modi.
-              </p>
-              <button className="bg-blue-500 text-white  py-2 px-4 rounded hover:bg-blue-700 mt-4 w-3/4 text-sm">
-                Learn More
-              </button>
-            </div>
-          </div>
-          <div className="flex flex-col border border-solid border-sky-400 w-11/12 justify-between rounded-md">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwm8GC2zXFmi6LR50M69scCiQyasKYRUeKkg&s"
-              alt=""
-              style={{ height: "10rem" }}
-            />
-            <div className="p-3 px-4">
-              <h2 className="fsize" style={{'--bs-font':'1.65rem'}}>Card title</h2>
-              <p className="text-xs mt-2">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Obcaecati similique quisquam iste nesciunt, ea modi.
-              </p>
-              <button className="bg-blue-500 text-white  py-2 px-4 rounded hover:bg-blue-700 mt-4 w-3/4 text-sm">
-                Learn More
-              </button>
-            </div>
-          </div>
-          <div className="flex flex-col border border-solid border-sky-400 w-11/12 justify-between rounded-md">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwm8GC2zXFmi6LR50M69scCiQyasKYRUeKkg&s"
-              alt=""
-              style={{ height: "10rem" }}
-            />
-            <div className="p-3 px-4">
-              <h2 className="fsize" style={{'--bs-font':'1.65rem'}}>Card title</h2>
-              <p className="text-xs mt-2">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Obcaecati similique quisquam iste nesciunt, ea modi.
-              </p>
-              <button className="bg-blue-500 text-white  py-2 px-4 rounded hover:bg-blue-700 mt-4 w-3/4 text-sm">
-                Learn More
-              </button>
-            </div>
-          </div>
-          <div className="flex flex-col border border-solid border-sky-400 w-11/12 justify-between rounded-md">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwm8GC2zXFmi6LR50M69scCiQyasKYRUeKkg&s"
-              alt=""
-              style={{ height: "10rem" }}
-            />
-            <div className="p-3 px-4">
-              <h2 className="fsize" style={{'--bs-font':'1.65rem'}}>Card title</h2>
-              <p className="text-xs mt-2">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Obcaecati similique quisquam iste nesciunt, ea modi.
-              </p>
-              <button className="bg-blue-500 text-white  py-2 px-4 rounded hover:bg-blue-700 mt-4 w-3/4 text-sm">
-                Learn More
-              </button>
-            </div>
-          </div>
-          <div className="flex flex-col border-2 border-dotted border-sky-400 w-11/12 justify-center items-center rounded-md h-full bg-[#38bff826]" style={{ minHeight: cardHeight }}>
-            <FontAwesomeIcon
-              icon={faCirclePlus}
-              className="fa-3x w-[fit-content] bg-white rounded-full hover:scale-110 transition-transform hover:cursor-pointer"
-              style={{ color: "#38bff8" }}
-            />
-          </div>
-        </div>
-      </div> */
-}
-
-// const toggleCheck = () =>{
-//   setCheck(!check)
-// }
-
-// const [check,setCheck] = useState(false)
