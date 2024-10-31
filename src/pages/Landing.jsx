@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-export default function HomePage() {
+
+export default function Landing() {
+  const [isMenuClicked, setIsMenuClicked] = useState(false);
+
  
 
   return (
@@ -21,14 +25,23 @@ export default function HomePage() {
                   </p>
                   <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                     <div className="rounded-md shadow">
-                      <a href='#' className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10">
-                        Get started
-                      </a>
+                      
+
+                      <Link to={"/watchlist"}>
+          <a
+            href=""
+            className={`${
+              isMenuClicked ? "mb-3" : ""
+            } w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10`}
+          >
+            Get started
+          </a>
+        </Link>{" "}
+
+
                     </div>
                     <div className="mt-3 sm:mt-0 sm:ml-3">
-                      <a href="#" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 md:py-4 md:text-lg md:px-10">
-                        Browse catalog
-                      </a>
+                      
                     </div>
                   </div>
                 </div>
@@ -48,46 +61,48 @@ export default function HomePage() {
        
 <div className="flex flex-wrap items-start gap-6 p-6">
     
-<a href="#" className="block max-w-xs w-full md:w-1/4">
+<a href="https://youtu.be/48L6B0fays4?si=be6qHBFJ_cYvPOwF" className="block max-w-xs w-full md:w-1/4">
     <div className="bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
-        <img className="w-full h-80 object-cover" src="https://podtailaudiobooks.com/wp-content/uploads/2024/06/Bibliomancer-Audiobook-300x300.jpg" alt="Product Image" />
+        <img className="w-full h-80 object-cover" src="https://m.media-amazon.com/images/I/71YsOJ728FL._AC_UF1000,1000_QL80_.jpg" alt="Product Image" />
         <div className="p-4">
-            <h5 className="text-md font-semibold text-gray-800">Bibliomancer</h5>
-            <div className="mt-4 text-xl font-bold text-gray-900">$29.99</div>
+            <h5 className="text-md font-semibold text-gray-800">GreenLights</h5>
+            <div className="mt-4 text-xl font-bold text-gray-900">$25.99</div>
         </div>
         <div className="flex justify-between p-4">
             <button className="text-white bg-blue-600 hover:bg-blue-700 font-bold py-2 px-3 rounded-lg">Play Now</button>
-            <button className="text-white bg-green-600 hover:bg-green-700 font-bold py-2 px-3 rounded-lg">Buy Now</button>
+            
         </div>
     </div>
 </a>
 
 
-    <a href="#" className="block max-w-xs w-full md:w-1/4">
-    <div className="bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
-        <img className="w-full h-80 object-cover" src="https://m.media-amazon.com/images/I/81yy8krce3L._UF1000,1000_QL80_.jpg" alt="Product Image" />
-        <div className="p-4">
-            <h5 className="text-md font-semibold text-gray-800">Greenlights</h5>
-            <div className="mt-4 text-xl font-bold text-gray-900">$29.99</div>
-        </div>
-        <div className="flex justify-between p-4">
-            <button className="text-white bg-blue-600 hover:bg-blue-700 font-bold py-2 px-3 rounded-lg">Play Now</button>
-            <button className="text-white bg-green-600 hover:bg-green-700 font-bold py-2 px-3 rounded-lg">Buy Now</button>
-        </div>
-    </div>
-</a>
-
-    
 <a href="#" className="block max-w-xs w-full md:w-1/4">
     <div className="bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
-        <img className="w-full h-80 object-cover" src="https://rukminim2.flixcart.com/image/850/1000/xif0q/book/y/9/o/it-ends-with-us-original-imah22fmsp6rsgkv.jpeg?q=20&crop=false" alt="Product Image" />
+        <img className="w-full h-80 object-cover" src="https://m.media-amazon.com/images/M/MV5BYzM2NGMzNGQtZjNhMi00MTVkLTg2ZGQtN2M4OTllYzU1Y2Y0XkEyXkFqcGc@._V1_QL75_UX190_CR0,0,190,281_.jpg" alt="Product Image" />
         <div className="p-4">
             <h5 className="text-md font-semibold text-gray-800">It ends with us</h5>
             <div className="mt-4 text-xl font-bold text-gray-900">$29.99</div>
         </div>
         <div className="flex justify-between p-4">
             <button className="text-white bg-blue-600 hover:bg-blue-700 font-bold py-2 px-3 rounded-lg">Play Now</button>
-            <button className="text-white bg-green-600 hover:bg-green-700 font-bold py-2 px-3 rounded-lg">Buy now</button>
+            
+        </div>
+    </div>
+</a>
+
+
+
+    
+<a href="https://youtu.be/hh_rNTdx9t0?si=doq5qb6qVpNxlm_2" className="block max-w-xs w-full md:w-1/4">
+    <div className="bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
+        <img className="w-full h-80 object-cover" src="https://m.media-amazon.com/images/I/81F90H7hnML._AC_UF1000,1000_QL80_.jpg" alt="Product Image" />
+        <div className="p-4">
+            <h5 className="text-md font-semibold text-gray-800">Atomic Habits</h5>
+            <div className="mt-4 text-xl font-bold text-gray-900">$29.99</div>
+        </div>
+        <div className="flex justify-between p-4">
+            <button className="text-white bg-blue-600 hover:bg-blue-700 font-bold py-2 px-3 rounded-lg">Play Now</button>
+            
         </div>
     </div>
 </a>
@@ -97,24 +112,7 @@ export default function HomePage() {
 
         </div>
 
-        {/* Categories */}
-        <div className="bg-gray-100">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-            <h2 className="text-2xl font-extrabold tracking-tight text-gray-900 mb-8">Browse by Category</h2>
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-              {['Fiction', 'Non-Fiction', 'Mystery', 'Sci-Fi', 'Romance', 'Biography', 'Self-Help', 'History'].map((category) => (
-                <a
-                  key={category}
-                  href="#"
-                  className="bg-white shadow rounded-lg p-6 text-center hover:shadow-lg transition-shadow duration-200"
-                >
-                  <h3 className="text-lg font-medium text-gray-900">{category}</h3>
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-
+       
         {/* Call to Action */}
         <div className="bg-blue-700">
           <div className="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">

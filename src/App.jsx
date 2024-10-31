@@ -5,7 +5,8 @@ import Watchlist from './pages/Watchlist'
 
 import Watchhistory from './pages/Watchhistory'
 import Footer from './components/Footer'
-import HomePage from './pages/Landing'
+
+import Landing from './pages/Landing'
 function App() {
 
 
@@ -18,7 +19,7 @@ function App() {
       </h1> */}
 
       <Routes>
-        <Route path = '/' element={<HomePage/>}/>
+        <Route path = '/' element={<Landing/>}/>
         <Route path='/watchlist' element={<Watchlist/>}/>
         <Route path='/watchhistory' element={<Watchhistory/>} />
       </Routes>
