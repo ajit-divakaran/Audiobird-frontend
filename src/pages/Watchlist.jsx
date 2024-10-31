@@ -1,7 +1,6 @@
 import {
   faAdd,
   faPlay,
-  faPlayCircle,
   faTimes,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
@@ -68,7 +67,7 @@ const Watchlist = () => {
     if (result.status >= 200 && result.status < 300) {
       getAllcategory();
       console.log(result);
-      toggleModal();
+      toggleModalCategory();
     }
     // setGetCategoryStatus(result.data);
   };
@@ -88,7 +87,7 @@ const Watchlist = () => {
     } else {
       alert("Category cannot be blank");
     }
-    toggleModal();
+    toggleModalCategory();
   };
 
   const toggleModalMedia = () => {
@@ -225,7 +224,7 @@ const Watchlist = () => {
                       </p>
                       <div className="flex justify-between items-center">
                         <button className="bg-[#38bff8c0] text-white  py-2 px-4 rounded hover:bg-blue-700 mt-4 w-[60%] text-sm">
-                          Buy Now
+                          Get original
                         </button>
                         <button className="bg-red-600 text-white  py-2 px-4 rounded hover:bg-red-500 mt-4 max-w-[50px] w-[20%] text-sm">
                           <FontAwesomeIcon icon={faTrash} />
