@@ -1,4 +1,10 @@
-import { faAdd, faPlay, faPlayCircle, faTimes } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAdd,
+  faPlay,
+  faPlayCircle,
+  faTimes,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons/faCirclePlus";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef, useState } from "react";
@@ -23,10 +29,12 @@ const Watchlist = () => {
   const [isOpen1, setIsOpen1] = useState(false); // toggle Add category modal
   // const[allMetaData,setAllMetaData] = useState({})
   const [id, setId] = useState(null);
+  const [isPlayClicked, setIsPlayClicked] = useState(false);
+  const [playImage, setPlayImage] = useState(null);
   // const [inputValue, setInputValue] = useState(null)
   // const [getCategoryStatus, setGetCategoryStatus] = useState({});
 
-  const toggleModal = () => {
+  const toggleModalCategory = () => {
     const newIsOpen = !isOpen;
     setIsOpen(newIsOpen);
 
@@ -99,11 +107,6 @@ const Watchlist = () => {
     setId(id);
     toggleModalMedia();
   };
-  //   const getAllMetaData = async() =>{
-  // const result = await GetMetaDataApi(id);
-  // console.log(result)
-  // setAllMetaData(result.data.cards)
-  // }
 
   const addMetadata = async () => {
     if (
@@ -137,6 +140,22 @@ const Watchlist = () => {
     }
 
     toggleModalMedia();
+  };
+
+  const toggleModalPlayer = () => {
+    const newIsOpen = !isPlayClicked;
+    setIsPlayClicked(newIsOpen);
+
+    if (newIsOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  };
+
+  const handlePlay = (img) => {
+    toggleModalPlayer();
+    setPlayImage(img);
   };
   useEffect(() => {
     // Measure height on mount
@@ -183,17 +202,35 @@ const Watchlist = () => {
                     ref={cardRef}
                     className="border h-full border-solid border-sky-400 flex flex-col w-11/12 justify-between rounded-md"
                   >
-                    <div className="relative w-full "><img src={data?.img} alt="" style={{ height: "10rem" ,width:'100%'}} />
-                    <FontAwesomeIcon icon={faPlay} className="fa-2x text-green-500 absolute top-[50%] left-[45%] transition-transform hover:scale-125"/>
+                    <div className="relative w-full ">
+                      <img
+                        src={data?.img}
+                        alt=""
+                        style={{ height: "10rem", width: "100%" }}
+                      />
+                      <FontAwesomeIcon
+                        onClick={() => handlePlay(data?.img)}
+                        icon={faPlay}
+                        className="scale-105 rounded-[50%] bg-[#38bff8] p-4 py-3 text-white absolute top-[35%] left-[40%] transition-transform hover:scale-125 hover:cursor-pointer"
+                      />
                     </div>
                     <div className="p-3 px-4 bg-transparent">
                       <h2 className="fsize" style={{ "--bs-font": "1.65rem" }}>
                         {data?.title}
                       </h2>
-                      <p className="text-xs mt-2">{data?.desc.length>50? data?.desc.slice(50)+"...":data?.desc}</p>
-                      <button className="bg-blue-500 text-white  py-2 px-4 rounded hover:bg-blue-700 mt-4 w-3/4 text-sm">
-                        Learn More
-                      </button>
+                      <p className="text-xs mt-2">
+                        {data?.desc.length > 50
+                          ? data?.desc.slice(50) + "..."
+                          : data?.desc}
+                      </p>
+                      <div className="flex justify-between items-center">
+                        <button className="bg-[#38bff8c0] text-white  py-2 px-4 rounded hover:bg-blue-700 mt-4 w-[60%] text-sm">
+                          Buy Now
+                        </button>
+                        <button className="bg-red-600 text-white  py-2 px-4 rounded hover:bg-red-500 mt-4 max-w-[50px] w-[20%] text-sm">
+                          <FontAwesomeIcon icon={faTrash} />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -222,7 +259,7 @@ const Watchlist = () => {
 
       <button
         className="fixed right-10 bottom-6 bg-[#ffca2c] px-4 py-2 rounded-full text-black"
-        onClick={toggleModal}
+        onClick={toggleModalCategory}
       >
         <FontAwesomeIcon icon={faAdd} className="mr-2" />
         Add Category
@@ -238,7 +275,7 @@ const Watchlist = () => {
               <FontAwesomeIcon
                 icon={faTimes}
                 className="scale-125"
-                onClick={toggleModal}
+                onClick={toggleModalCategory}
               />
             </div>
             <label htmlFor="category">Category name</label>
@@ -269,7 +306,7 @@ const Watchlist = () => {
               <FontAwesomeIcon
                 icon={faTimes}
                 className="scale-125"
-                onClick={toggleModal}
+                onClick={toggleModalMedia}
               />
             </div>
             <label htmlFor="category">Add image url</label>
@@ -307,7 +344,33 @@ const Watchlist = () => {
           </div>
         </div>
       )}
-      {/* </div> */}
+
+      {isPlayClicked && (
+        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-start justify-center z-50">
+          <div className="bg-black rounded-lg shadow-lg max-w-md w-full p-6 mt-8 h-[85vh] overflow-auto scrollbar-hide">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-semibold">Title</h2>
+
+              <FontAwesomeIcon
+                icon={faTimes}
+                className="scale-125"
+                onClick={toggleModalPlayer}
+              />
+            </div>
+            <hr className=" border-t-1 border-slate-700 w-full" />
+            <div className="flex justify-center w-[100%] h-[50vh]">
+              <img src={playImage} alt="" className="w-[100%]" />
+            </div>
+            <div className="flex items-center justify-center mt-4 p-4 bg-gray-800 rounded-lg shadow-lg max-w-md mx-auto">
+              <audio controls className="w-full">
+                <source src="https://audio.jukehost.co.uk/4KmvBM0Ox7tCouX67Cx5RR0howuEq9F4" type="audio/mp3"/>
+                Your browser does not support the audio element.
+              </audio>
+            </div>
+    
+          </div>
+        </div>
+      )}
     </div>
   );
 };
