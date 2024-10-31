@@ -4,8 +4,13 @@ import Header from './components/Header'
 import Watchlist from './pages/Watchlist'
 import Landing from './pages/Landing'
 import Watchhistory from './pages/Watchhistory'
+import { AddToWatchHistoryApi } from './services/allApi';
 
 function App() {
+
+  const addToWatchHistory = async (entry) => {
+    await AddToWatchHistoryApi(entry); 
+  };
 
 
   return (
@@ -18,7 +23,7 @@ function App() {
 
       <Routes>
         <Route path = '/' element={<Landing/>}/>
-        <Route path='/watchlist' element={<Watchlist/>}/>
+        <Route path='/watchlist' element={<Watchlist onAddToHistory={addToWatchHistory}/>}/>
         <Route path='/watchhistory' element={<Watchhistory/>} />
       </Routes>
  

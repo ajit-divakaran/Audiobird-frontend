@@ -8,6 +8,7 @@ import {
   GetCategoryApi,
   GetMetaDataApi,
   UpdateMetaDataApi,
+  AddToWatchHistoryApi,
 } from "../services/allApi";
 
 const Watchlist = () => {
@@ -127,6 +128,14 @@ const Watchlist = () => {
         };
         result.data.cards.push(card);
         console.log(result.data);
+
+         //Add to watch history
+         await onAddToHistory({
+          caption: card.title,
+          url: card.img,
+          timestamp: new Date().toISOString(),
+        });
+
         const update = await UpdateMetaDataApi(result.data, id);
         console.log(update.data);
       }
