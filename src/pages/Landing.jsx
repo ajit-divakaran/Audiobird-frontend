@@ -23,6 +23,7 @@ export default function Landing() {
                   <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
                     Immerse yourself in captivating stories narrated by world-class voice actors. Start your audio journey today.
                   </p>
+                  <p className='mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0'>Dive into a new world—no pages required! 📖🎧 #Audiobird</p>
                   <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                     <div className="rounded-md shadow">
                       
@@ -48,9 +49,12 @@ export default function Landing() {
               </main>
             </div>
           </div>
-          <div class="flex items-center justify-center min-h-screen bg-gray-100">
-             <img src="https://static.voices.com/wp-content/uploads/History-of-Audiobooks.jpg" alt="description" class="w-full sm:w-64 md:w-80 lg:w-96 xl:w-[40rem] h-auto object-cover rounded-lg shadow-lg" />
-          </div>
+          <div class="flex items-center justify-center min-h-screen bg-gray-100 flex-col">
+    <img src="https://static.voices.com/wp-content/uploads/History-of-Audiobooks.jpg" alt="description" class="w-full sm:w-64 md:w-80 lg:w-96 xl:w-[40rem] h-auto object-cover rounded-lg shadow-lg" />
+    <h3 class="mt-4 text-lg font-semibold text-gray-800">Play your audio book seamlessly</h3>
+</div>
+
+          
 
 
         </div>
@@ -118,16 +122,16 @@ export default function Landing() {
           <div className="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
               <span className="block">Start your audio journey today.</span>
-              <span className="block">Sign up for a free trial.</span>
+              
             </h2>
             <p className="mt-4 text-lg leading-6 text-blue-200">
-              Get unlimited access to thousands of audiobooks for 30 days. No commitment required.
+              Get unlimited access to audiobooks. No commitment required.
             </p>
             <a
               href="#"
               className="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 sm:w-auto"
             >
-              Sign up for free trial
+              Start now
             </a>
           </div>
         </div>

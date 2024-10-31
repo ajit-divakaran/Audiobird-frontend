@@ -4,9 +4,11 @@ import Header from './components/Header'
 import Watchlist from './pages/Watchlist'
 
 import Watchhistory from './pages/Watchhistory'
+
 import Footer from './components/Footer'
 
 import Landing from './pages/Landing'
+
 function App() {
 
 
