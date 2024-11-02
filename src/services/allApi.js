@@ -1,5 +1,7 @@
 import { commonApi } from "./commonApi"
 import {serverurl} from "./serverurl"
+// import { systemcommonApi } from "./systemcommonApi"
+
  
 
  export const AddCategoryApi = async(reqbody)=>{
@@ -13,5 +15,11 @@ import {serverurl} from "./serverurl"
  }
 
  export const GetMetaDataApi = async(id)=>{
+   return await commonApi('GET',`${serverurl}/category/${id}`)
+}
+ export const AddAudioApi = async(reqbody)=>{
+   return await commonApi('POST',`${serverurl}/audios`,reqbody)
+}
+ export const GetAudioApi = async(id)=>{
    return await commonApi('GET',`${serverurl}/category/${id}`)
 }
