@@ -20,3 +20,6 @@
 .fsize{
   font-size: calc(var(--bs-font) + 0.25vw);
 }
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari, Opera */
+}
