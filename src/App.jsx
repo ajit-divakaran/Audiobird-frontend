@@ -10,7 +10,7 @@ import Footer from './components/Footer'
 
 import Landing from './pages/Landing'
 function App() {
-const [allHistory,setAllHistory] = useState(null)
+const [allHistory,setAllHistory] = useState({})
 
   return (
     <>

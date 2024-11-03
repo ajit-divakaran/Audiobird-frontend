@@ -35,16 +35,16 @@ function Footer() {
           <div>
             <h3 className="text-lg font-semibold text-white mb-4">Newsletter</h3>
             <p className="text-sm mb-4">Stay updated with our latest releases and offers.</p>
-            <form class=" p-6 rounded-lg shadow-lg">
-      <div class="flex flex-col space-y-4">
+            <form className=" p-6 rounded-lg shadow-lg">
+      <div className="flex flex-col space-y-4">
         <input
           type="email"
           placeholder="Enter your email"
-          class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <button
           type="submit"
-          class="w-full px-6 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-300"
+          className="w-full px-6 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-300"
         >
           Subscribe
         </button>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 
 export default function Landing() {
-  const [isMenuClicked, setIsMenuClicked] = useState(false);
+
 
  
 
@@ -30,9 +30,7 @@ export default function Landing() {
                       <Link to={"/watchlist"}>
           <a
             href=""
-            className={`${
-              isMenuClicked ? "mb-3" : ""
-            } w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10`}
+            className={` w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10`}
           >
             Get started
           </a>
@@ -48,8 +46,8 @@ export default function Landing() {
               </main>
             </div>
           </div>
-          <div class="flex items-center justify-center min-h-screen bg-gray-100">
-             <img src="https://static.voices.com/wp-content/uploads/History-of-Audiobooks.jpg" alt="description" class="w-full sm:w-64 md:w-80 lg:w-96 xl:w-[40rem] h-auto object-cover rounded-lg shadow-lg" />
+          <div className="flex items-center justify-center min-h-screen bg-gray-100">
+             <img src="https://static.voices.com/wp-content/uploads/History-of-Audiobooks.jpg" alt="description" className="w-full sm:w-64 md:w-80 lg:w-96 xl:w-[40rem] h-auto object-cover rounded-lg shadow-lg" />
           </div>
 
 
@@ -117,17 +115,17 @@ export default function Landing() {
         <div className="bg-blue-700">
           <div className="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
-              <span className="block">Start your audio journey today.</span>
-              <span className="block">Sign up for a free trial.</span>
+              <span className="block">Start your audio journey today with Audiobird.</span>
+              {/* <span className="block">Sign up for a free trial.</span> */}
             </h2>
             <p className="mt-4 text-lg leading-6 text-blue-200">
-              Get unlimited access to thousands of audiobooks for 30 days. No commitment required.
+             Create your own Spotify for AudioBooks
             </p>
             <a
               href="#"
               className="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 sm:w-auto"
             >
-              Sign up for free trial
+              Get Started
             </a>
           </div>
         </div>

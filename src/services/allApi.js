@@ -35,3 +35,12 @@ export const AddToWatchHistoryApi = async(reqbody)=>{
 export const GetWatchHistoryApi = async()=>{
    return await commonApi('GET',`${serverurl}/history`)
 }
+export const DeleteWatchHistoryApi = async(id)=>{
+   return await commonApi('DELETE',`${serverurl}/history/${id}`)
+}
+
+export const DeleteAllWatchHistoryApi = async() => {
+   console.log(serverurl)
+   return await commonApi('PUT', `${serverurl}/history`, { history: [] })
+};
+
