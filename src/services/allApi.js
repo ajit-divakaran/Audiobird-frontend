@@ -23,9 +23,24 @@ import {serverurl} from "./serverurl"
  export const GetMetaDataApi = async(id)=>{
    return await commonApi('GET',`${serverurl}/category/${id}`)
 }
- export const AddAudioApi = async(reqbody)=>{
-   return await commonApi('POST',`${serverurl}/audios`,reqbody)
-}
+//  export const AddAudioApi = async(reqbody)=>{
+//    return await commonApi('POST',`${serverurl}/audios`,reqbody)
+// }
  export const GetAudioApi = async(id)=>{
    return await commonApi('GET',`${serverurl}/category/${id}`)
 }
+export const AddToWatchHistoryApi = async(reqbody)=>{
+   return await commonApi('POST',`${serverurl}/history`,reqbody)
+}
+export const GetWatchHistoryApi = async()=>{
+   return await commonApi('GET',`${serverurl}/history`)
+}
+export const DeleteWatchHistoryApi = async(id)=>{
+   return await commonApi('DELETE',`${serverurl}/history/${id}`)
+}
+
+export const DeleteAllWatchHistoryApi = async() => {
+   console.log(serverurl)
+   return await commonApi('PUT', `${serverurl}/history`, { history: [] })
+};
+

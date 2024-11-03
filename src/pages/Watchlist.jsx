@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import React from "react";
 import {
   AddCategoryApi,
+  AddToWatchHistoryApi,
   DeleteCategoryApi,
   GetAudioApi,
   GetCategoryApi,
@@ -17,7 +18,7 @@ import {
   UpdateMetaDataApi,
 } from "../services/allApi";
 
-const Watchlist = () => {
+const Watchlist = ({setAllHistory}) => {
   const cardRef = useRef(null); // To get the width of the first element card height
   const inputRefCategoryName = useRef(null); // To get the category name input value
   const inputRefImage = useRef(null); // To get the card image input value
@@ -195,6 +196,13 @@ const Watchlist = () => {
     }
   };
 
+  const addToWatchHistory = async(audio) =>{
+    const add = await AddToWatchHistoryApi(audio)
+    if(add.status>=200 && add.status<300){
+      console.log(add.data)
+    }
+  }
+
   const handlePlayAndCardClick = async(details,categoryId) => {
     // const {img,title,desc} = details
 
@@ -205,6 +213,7 @@ const Watchlist = () => {
       const audio = result.data.cards.filter(x=>x.title==details.title)[0];
       console.log(audio);
       setAudioData(audio)
+      addToWatchHistory(audio);
     }
     toggleModalPlayer();
 
