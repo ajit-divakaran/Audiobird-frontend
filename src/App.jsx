@@ -4,9 +4,10 @@ import Header from './components/Header'
 import Watchlist from './pages/Watchlist'
 import Landing from './pages/Landing'
 import Watchhistory from './pages/Watchhistory'
+import { useState } from 'react'
 
 function App() {
-
+const [allHistory,setAllHistory] = useState(null)
 
   return (
     <>
@@ -18,8 +19,8 @@ function App() {
 
       <Routes>
         <Route path = '/' element={<Landing/>}/>
-        <Route path='/watchlist' element={<Watchlist/>}/>
-        <Route path='/watchhistory' element={<Watchhistory/>} />
+        <Route path='/watchlist' element={<Watchlist setAllHistory={setAllHistory}/>}/>
+        <Route path='/watchhistory' element={<Watchhistory allHistory={allHistory} setAllHistory={setAllHistory}/>}/>
       </Routes>
  
     </>
