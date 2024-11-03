@@ -10,6 +10,12 @@ import {serverurl} from "./serverurl"
  export const GetCategoryApi = async()=>{
     return await commonApi('GET',`${serverurl}/category`)
  }
+
+ export const DeleteCategoryApi = async(id)=>{
+    return await commonApi('DELETE',`${serverurl}/category/${id}`)
+ }
+
+
  export const UpdateMetaDataApi = async(reqbody,id)=>{
     return await commonApi('PUT',`${serverurl}/category/${id}`,reqbody)
  }
