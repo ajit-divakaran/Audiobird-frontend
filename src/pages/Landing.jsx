@@ -64,7 +64,7 @@ export default function Landing() {
         <img className="w-full h-80 object-cover" src="https://m.media-amazon.com/images/I/71YsOJ728FL._AC_UF1000,1000_QL80_.jpg" alt="Product Image" />
         <div className="p-4">
             <h5 className="text-md font-semibold text-gray-800">GreenLights</h5>
-            <div className="mt-4 text-xl font-bold text-gray-900">$25.99</div>
+            {/* <div className="mt-4 text-xl font-bold text-gray-900"></div> */}
         </div>
         <div className="flex justify-between p-4">
             <button className="text-white bg-blue-600 hover:bg-blue-700 font-bold py-2 px-3 rounded-lg">Play Now</button>
@@ -74,12 +74,12 @@ export default function Landing() {
 </a>
 
 
-<a href="#" className="block max-w-xs w-full md:w-1/4">
+<a href="https://youtu.be/P7hVmeWISwk?si=cbMrnQEQV37-rNE2" className="block max-w-xs w-full md:w-1/4">
     <div className="bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden">
         <img className="w-full h-80 object-cover" src="https://m.media-amazon.com/images/M/MV5BYzM2NGMzNGQtZjNhMi00MTVkLTg2ZGQtN2M4OTllYzU1Y2Y0XkEyXkFqcGc@._V1_QL75_UX190_CR0,0,190,281_.jpg" alt="Product Image" />
         <div className="p-4">
             <h5 className="text-md font-semibold text-gray-800">It ends with us</h5>
-            <div className="mt-4 text-xl font-bold text-gray-900">$29.99</div>
+            {/* <div className="mt-4 text-xl font-bold text-gray-900"></div> */}
         </div>
         <div className="flex justify-between p-4">
             <button className="text-white bg-blue-600 hover:bg-blue-700 font-bold py-2 px-3 rounded-lg">Play Now</button>
@@ -96,7 +96,7 @@ export default function Landing() {
         <img className="w-full h-80 object-cover" src="https://m.media-amazon.com/images/I/81F90H7hnML._AC_UF1000,1000_QL80_.jpg" alt="Product Image" />
         <div className="p-4">
             <h5 className="text-md font-semibold text-gray-800">Atomic Habits</h5>
-            <div className="mt-4 text-xl font-bold text-gray-900">$29.99</div>
+            {/* <div className="mt-4 text-xl font-bold text-gray-900"></div> */}
         </div>
         <div className="flex justify-between p-4">
             <button className="text-white bg-blue-600 hover:bg-blue-700 font-bold py-2 px-3 rounded-lg">Play Now</button>
@@ -121,12 +121,14 @@ export default function Landing() {
             <p className="mt-4 text-lg leading-6 text-blue-200">
              Create your own Spotify for AudioBooks
             </p>
-            <a
-              href="#"
-              className="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 sm:w-auto"
-            >
-              Get Started
-            </a>
+     <Link to={'/watchlist'}>
+              <a
+                href="#"
+                className="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 sm:w-auto"
+              >
+                Get Started
+              </a>
+     </Link>
           </div>
         </div>
       </main>

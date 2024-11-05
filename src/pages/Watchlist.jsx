@@ -40,6 +40,8 @@ const Watchlist = ({setAllHistory}) => {
   const [addCategoryStatus,setAddCategoryStatus] = useState(null);
   const [deleteAudioCardStatus,setDeleteAudioCardStatus] = useState(null)
   const [loading,setLoading] = useState(false)
+  // const [showButton,setShowButton] = useState(true)
+  // const scrollLimit = 
   // const [inputValue, setInputValue] = useState(null)
   // const [getCategoryStatus, setGetCategoryStatus] = useState({});
 
@@ -59,7 +61,7 @@ const Watchlist = ({setAllHistory}) => {
 
   // Function to update card height
   const updateCardHeight = () => {
-    if (cardRef.current) {
+    if (cardRef.current>cardHeight) {
       setCardHeight(cardRef.current.offsetHeight);
     }
   };
@@ -252,6 +254,8 @@ const Watchlist = ({setAllHistory}) => {
     
   };
 
+  console.log(cardRef)
+
   const handleCategoryDelete = async(id) =>{
     setLoading(true)
     const result = await DeleteCategoryApi(id);
@@ -270,8 +274,14 @@ const Watchlist = ({setAllHistory}) => {
     updateCardHeight();
     getAllcategory();
 
+    // const handleScroll = ()=>{
+    //   if
+    // }
+
     // Add event listener for window resize
     window.addEventListener("resize", updateCardHeight);
+
+    // window.addEventListener("scroll",handleScroll)
 
     // Cleanup event listener on component unmount
     return () => {
@@ -316,9 +326,9 @@ const Watchlist = ({setAllHistory}) => {
                 {item?.cards.map((data,index) => (
                   <div
                     key={index}
+                   
+                    className="border h-full border-solid border-sky-400  flex flex-col w-11/12 justify-between rounded-md"
                     ref={cardRef}
-                    className="border h-full border-solid border-sky-400  mt-3 flex flex-col w-11/12 justify-between rounded-md"
-                    // onClick={()=>handleCardClick(data?.id)}
                   >
                     <div className="relative w-full ">
                       <img
@@ -338,10 +348,12 @@ const Watchlist = ({setAllHistory}) => {
                       <h2 className="fsize" style={{ "--bs-font": "1.65rem" }}>
                         {data?.title}
                       </h2>
-                      <p className="text-xs mt-2">
-                        {data?.desc.length > 50
+                      <p className="text-xs mt-2 overflow-hidden text-ellipsis">
+                        {
+                        data?.desc.length > 50
                           ? data?.desc.slice(50) + "..."
-                          : data?.desc}
+                          : 
+                          data?.desc}
                       </p>
                       <div className="flex justify-between items-center">
                         <button className="bg-[#38bff8c0] text-white  py-2 px-4 rounded hover:bg-blue-700 mt-4 w-[60%] text-sm">
@@ -359,8 +371,8 @@ const Watchlist = ({setAllHistory}) => {
                 ))}
 
                 <div
-                  className="flex flex-col min-h-[300px] border-2 border-dotted border-sky-400 w-11/12 justify-center items-center rounded-md min-h-full bg-[#38bff826]"
-                  style={{ minHeight: `${cardHeight}px` }}
+                  className="flex flex-col border-2 border-dotted border-sky-400 w-11/12 justify-center items-center rounded-md bg-[#38bff826]"
+                  style={{ minHeight: `${cardHeight}px` , height:'100%'}}
                   onClick={() => handleMetaDataClick(item?.id)}
                 >
                   {console.log(cardHeight)}
@@ -515,6 +527,8 @@ const Watchlist = ({setAllHistory}) => {
           </div>
         </div>
       )}
+    
+    <p className="w-full text-center mt-10">Please <span className="text-blue-500">Refresh</span> the page if the content doesn't load</p>
     </div>
   );
 };

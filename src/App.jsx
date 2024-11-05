@@ -22,7 +22,7 @@ const [allHistory,setAllHistory] = useState({})
 
       <Routes>
         <Route path = '/' element={<Landing/>}/>
-        <Route path='/watchlist' element={<Watchlist setAllHistory={setAllHistory}/>}/>
+        <Route path='/watchlist' element={<Watchlist />}/>
         <Route path='/watchhistory' element={<Watchhistory allHistory={allHistory} setAllHistory={setAllHistory}/>}/>
       </Routes>
       <Footer/>
