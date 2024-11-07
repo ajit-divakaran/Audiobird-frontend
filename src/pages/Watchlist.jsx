@@ -357,7 +357,7 @@ const Watchlist = ({setAllHistory}) => {
                       </p>
                       <div className="flex justify-between items-center">
                         <button className="bg-[#38bff8c0] text-white  py-2 px-4 rounded hover:bg-blue-700 mt-4 w-[60%] text-sm">
-                          Get original
+                          <a href = {`https://www.digitalbook.io/search/audiobook/all/${data?.title}`} target="_blank">Get original</a>
                         </button>
                         <button
                           onClick={()=>handleDelete(item?.id,data?.title)}
