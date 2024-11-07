@@ -309,13 +309,13 @@ const Watchlist = ({setAllHistory}) => {
         <div className="category mt-8">
           {allcategory?.map((item) => (
             <div key={item?.id}>
-              <div className="flex gap-x-[30%] items-center mt-8">
-                <h1 className="fsize" style={{ "--bs-font": "1.9rem" }}>
+              <div className="flex gap-x-[40vw] flex-wrap items-center mt-8 ">
+                <h1 className="text-[1rem] sm:text-[2rem]">
                   {item?.name}
                 </h1>
                 <button
                          
-                          className="bg-red-600 text-white mt-0 py-2 px-4 rounded hover:bg-red-500  max-w-[50px] w-[20%] text-sm "
+                          className="bg-red-600 text-white mt-0 py-2 px-4 rounded hover:bg-red-500 text-sm "
                           onClick={()=>handleCategoryDelete(item?.id)}
                         >
                           <FontAwesomeIcon icon={faTrash} />
@@ -471,7 +471,7 @@ const Watchlist = ({setAllHistory}) => {
             <label htmlFor="file">Select the audio file: <span className="text-xs text-slate-500 ms-6">(only mp3 file accepted)</span></label>
             <input
               type="file"
-              id="file"
+              id="file"z
               placeholder="Description"
               className="w-full text-black px-4 py-2 bg-blue-100 rounded mt-2"
               onChange={handleSelectFile}

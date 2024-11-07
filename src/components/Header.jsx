@@ -18,8 +18,9 @@ const Header = () => {
         <img
           src="/images/cover-removebg-preview.png"
           alt=""
-          width={"170px"}
+          
           height={"0.8rem"}
+          className="sm:w-[170px] w-[100px]"
         />
 
         <button
